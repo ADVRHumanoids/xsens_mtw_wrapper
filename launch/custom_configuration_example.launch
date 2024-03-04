@@ -1,11 +1,14 @@
 <?xml version="1.0"?>
 
 <launch>
+
+  <arg name="rviz" default="false" />
+
   <include file="$(find hiros_xsens_mtw_wrapper)/launch/default.launch">
     <arg name="node_required"             value="true"                />
     <arg name="node_name"                 value="xsens_node_01"       />
 
-    <arg name="number_of_mtws"            value="6"                   />
+    <arg name="number_of_mtws"            value="1"                   />
     <arg name="desired_update_rate"       value="120"                 />
 
     <arg name="enable_custom_labeling"    value="true"                />
@@ -13,7 +16,7 @@
 
     <arg name="synchronize"               value="true"                />
     <arg name="sync_policy"               value="fill_partial_frames" />
-    <arg name="publish_mimu_array"        value="true"                />
+    <arg name="publish_mimu_array"        value="false"                />
 
     <arg name="publish_imu"               value="true"                />
     <arg name="publish_mag"               value="true"                />
@@ -22,4 +25,8 @@
     <arg name="publish_pressure"          value="false"               />
     <arg name="publish_tf"                value="true"                />
   </include>
+
+  <node if="$(arg rviz)" type="rviz" name="rviz_awinda" pkg="rviz" args="-d $(find hiros_xsens_mtw_wrapper)/config/rviz.rviz" >
+  </node> 
+
 </launch>

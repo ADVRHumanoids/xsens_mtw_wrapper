@@ -16,7 +16,6 @@
 #include "tf2_ros/transform_broadcaster.h"
 
 // Internal dependencies
-#include "hiros_xsens_mtw_wrapper/Euler.h"
 #include "hiros_xsens_mtw_wrapper/MIMU.h"
 #include "hiros_xsens_mtw_wrapper/MIMUArray.h"
 #include "hiros_xsens_mtw_wrapper/ResetOrientation.h"
@@ -163,7 +162,7 @@ namespace hiros {
       std_msgs::Header getHeader(std::shared_ptr<XsDataPacket> packet) const;
       sensor_msgs::Imu getImuMsg(std::shared_ptr<XsDataPacket> packet) const;
       sensor_msgs::MagneticField getMagMsg(std::shared_ptr<XsDataPacket> packet) const;
-      hiros_xsens_mtw_wrapper::Euler getEulerMsg(std::shared_ptr<XsDataPacket> packet) const;
+      geometry_msgs::Vector3Stamped getEulerMsg(std::shared_ptr<XsDataPacket> packet) const;
       geometry_msgs::Vector3Stamped getFreeAccelerationMsg(std::shared_ptr<XsDataPacket> packet) const;
       sensor_msgs::FluidPressure getPressureMsg(std::shared_ptr<XsDataPacket> packet) const;
       hiros_xsens_mtw_wrapper::MIMU getMIMUMsg(std::shared_ptr<XsDataPacket> packet) const;

@@ -617,7 +617,7 @@ void hiros::xsens_mtw::Wrapper::setupRos()
 
       if (wrapper_params_.publish_euler) {
         euler_pubs_.emplace(device.first,
-                            nh_.advertise<hiros_xsens_mtw_wrapper::Euler>(
+                            nh_.advertise<geometry_msgs::Vector3Stamped>(
                               composeTopicPrefix(device.first) + "/filter/euler", ros_topic_queue_size_));
       }
 
@@ -700,12 +700,12 @@ void hiros::xsens_mtw::Wrapper::syncInitialPackets()
 
 bool hiros::xsens_mtw::Wrapper::resetInitialOrientation() const
 {
-  ROS_DEBUG_STREAM("Xsens Mtw Wrapper... Resetting initial orientation");
+  ROS_INFO_STREAM("Xsens Mtw Wrapper... Resetting initial orientation");
 
   bool success = true;
 
   for (auto& device : connected_devices_) {
-    success = device.second->resetOrientation(XRM_Heading) && success;
+    success = device.second->resetOrientation(XRM_Alignment) && success;
   }
 
   if (!success) {
@@ -835,17 +835,17 @@ sensor_msgs::MagneticField hiros::xsens_mtw::Wrapper::getMagMsg(std::shared_ptr<
   return out_msg;
 }
 
-hiros_xsens_mtw_wrapper::Euler hiros::xsens_mtw::Wrapper::getEulerMsg(std::shared_ptr<XsDataPacket> packet) const
+geometry_msgs::Vector3Stamped hiros::xsens_mtw::Wrapper::getEulerMsg(std::shared_ptr<XsDataPacket> packet) const
 {
-  hiros_xsens_mtw_wrapper::Euler out_msg;
+  geometry_msgs::Vector3Stamped out_msg;
   out_msg.header = getHeader(packet);
 
   // roll = atan2(2 * (qw * qx + qy * qz), (1 - 2 * (pow(qx, 2) + pow(qy, 2))))
-  out_msg.roll = packet->orientationEuler().roll();
+  out_msg.vector.x = packet->orientationEuler().roll();
   // pitch = asin(2 * (qw * qy - qz * qx))
-  out_msg.pitch = packet->orientationEuler().pitch();
+  out_msg.vector.y = packet->orientationEuler().pitch();
   // yaw = atan2(2 * (qw * qz + qx * qy), (1 - 2 * (pow(qy, 2) + pow(qz, 2))))
-  out_msg.yaw = packet->orientationEuler().yaw();
+  out_msg.vector.z = packet->orientationEuler().yaw();
 
   return out_msg;
 }
@@ -888,7 +888,11 @@ hiros_xsens_mtw_wrapper::MIMU hiros::xsens_mtw::Wrapper::getMIMUMsg(std::shared_
   }
 
   if (wrapper_params_.publish_euler && packet->containsOrientation()) {
-    out_msg.euler = getEulerMsg(packet);
+    auto eul_xyz = getEulerMsg(packet);
+    out_msg.euler.roll = eul_xyz.vector.x;
+    out_msg.euler.pitch = eul_xyz.vector.y;
+    out_msg.euler.yaw = eul_xyz.vector.z;
+
   }
 
   if (wrapper_params_.publish_free_acceleration && packet->containsFreeAcceleration()) {

@@ -11,6 +11,8 @@
     <arg name="number_of_mtws"            value="1"                   />
     <arg name="desired_update_rate"       value="120"                 />
 
+    <arg name="reset_initial_orientation"       value="true"           />
+
     <arg name="enable_custom_labeling"    value="true"                />
     <arg name="enable_external_sync"      value="true"                />
 
@@ -19,11 +21,13 @@
     <arg name="publish_mimu_array"        value="false"                />
 
     <arg name="publish_imu"               value="true"                />
-    <arg name="publish_mag"               value="true"                />
+    <arg name="publish_mag"               value="false"                />
     <arg name="publish_euler"             value="true"                />
     <arg name="publish_free_acceleration" value="false"               />
     <arg name="publish_pressure"          value="false"               />
     <arg name="publish_tf"                value="true"                />
+
+
   </include>
 
   <node if="$(arg rviz)" type="rviz" name="rviz_awinda" pkg="rviz" args="-d $(find hiros_xsens_mtw_wrapper)/config/rviz.rviz" >

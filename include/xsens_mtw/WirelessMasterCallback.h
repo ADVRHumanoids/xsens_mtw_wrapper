@@ -3,6 +3,7 @@
 
 // Xsens dependencies
 #include "xsensdeviceapi.h"
+#include "/usr/local/xsens/examples/mtsdk/xda_cpp/xsmutex.h"
 
 // Internal dependencies
 #include "xsens_mtw/utils.h"

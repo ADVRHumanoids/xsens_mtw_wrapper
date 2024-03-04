@@ -1,6 +1,8 @@
 #ifndef hiros_xsens_mtw_wrapper_h
 #define hiros_xsens_mtw_wrapper_h
 
+
+
 // Standard dependencies
 #include <csignal>
 
@@ -24,6 +26,8 @@
 #include "xsens_mtw/Synchronizer.h"
 #include "xsens_mtw/WirelessMasterCallback.h"
 
+#include <xstypes/xstime.h>
+
 #define BASH_MSG_RESET "\033[0m"
 #define BASH_MSG_GREEN "\033[32m"
 
@@ -45,8 +49,8 @@ namespace hiros {
                                                                            {XSL_Out2, "XSL_Out2"}};
 
     static const std::map<std::string, XsSyncFunction> sync_function_map = {
-      {"XSF_StartRecording", XSF_StartRecording},
-      {"XSF_StopRecording", XSF_StopRecording},
+      {"XSF_StartRecording", XSF_StartRecordingIn},
+      {"XSF_StopRecording", XSF_StopRecordingIn},
       {"XSF_ResetTimer", XSF_ResetTimer},
       {"XSF_TriggerIndication", XSF_TriggerIndication},
       {"XSF_IntervalTransitionMeasurement", XSF_IntervalTransitionMeasurement},

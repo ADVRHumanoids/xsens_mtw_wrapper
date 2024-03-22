@@ -80,6 +80,7 @@ namespace hiros {
     {
       int number_of_mtws;
       std::string tf_prefix;
+      std::string tf_ref;
       bool enable_custom_labeling;
       bool enable_external_sync;
 

@@ -7,6 +7,7 @@
   <include file="$(find hiros_xsens_mtw_wrapper)/launch/default.launch">
     <arg name="node_required"             value="true"                />
     <arg name="node_name"                 value="xsens_node_01"       />
+    <arg name="tf_ref"                    default="imu_ref"                    />
 
     <arg name="number_of_mtws"            value="1"                   />
     <arg name="desired_update_rate"       value="120"                 />

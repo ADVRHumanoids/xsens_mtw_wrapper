@@ -4,6 +4,7 @@
   <arg name="node_required"             default="false"               />
   <arg name="node_name"                 default="xsens_mtw"           />
   <arg name="tf_prefix"                 default=""                    />
+  <arg name="tf_ref"                    default="world"                    />
   <arg name="number_of_mtws"            default="0"                   />
 
   <arg name="desired_update_rate"       default="100"                 />
@@ -32,6 +33,7 @@
 
     <param name="node_name"                 type="str"    value="$(arg node_name)"                 />
     <param name="tf_prefix"                 type="str"    value="$(arg tf_prefix)"                 />
+    <param name="tf_ref"                    type="str"    value="$(arg tf_ref)"                 />
     <param name="number_of_mtws"            type="int"    value="$(arg number_of_mtws)"            />
 
     <param name="desired_update_rate"       type="int"    value="$(arg desired_update_rate)"       />

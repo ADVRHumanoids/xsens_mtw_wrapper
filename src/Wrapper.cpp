@@ -164,6 +164,7 @@ void hiros::xsens_mtw::Wrapper::configureWrapper()
 
   nh_.getParam("number_of_mtws", wrapper_params_.number_of_mtws);
   nh_.getParam("tf_prefix", wrapper_params_.tf_prefix);
+  nh_.getParam("tf_ref", wrapper_params_.tf_ref);
   nh_.getParam("enable_custom_labeling", wrapper_params_.enable_custom_labeling);
   nh_.getParam("enable_external_sync", wrapper_params_.enable_external_sync);
 
@@ -922,7 +923,7 @@ geometry_msgs::TransformStamped hiros::xsens_mtw::Wrapper::getTf(std::shared_ptr
 {
   geometry_msgs::TransformStamped tf;
   tf.header = getHeader(packet);
-  tf.header.frame_id = "world";
+  tf.header.frame_id = wrapper_params_.tf_ref;
   tf.child_frame_id = wrapper_params_.tf_prefix + getDeviceLabel(packet->deviceId());
 
   tf.transform.translation.x = 0.0;

@@ -1,3 +1,4 @@
 *.code
 *.kdev
 *.code-workspace
+*.vscode

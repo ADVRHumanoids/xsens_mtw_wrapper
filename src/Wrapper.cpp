@@ -964,7 +964,8 @@ bool hiros::xsens_mtw::Wrapper::resetOrientation(hiros_xsens_mtw_wrapper::ResetO
     }
   }
 
-  return success;
+  res.success = success;
+  return true;
 }
 
 bool hiros::xsens_mtw::Wrapper::startRecording(hiros_xsens_mtw_wrapper::StartRecording::Request& req,

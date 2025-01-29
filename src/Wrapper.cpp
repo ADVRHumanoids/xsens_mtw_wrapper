@@ -942,7 +942,8 @@ bool hiros::xsens_mtw::Wrapper::resetOrientation(hiros_xsens_mtw_wrapper::ResetO
 {
   bool success = true;
 
-  if (req.sensors.empty()) {
+  if (req.sensors.empty() || 
+      req.sensors.at(0).size() == 0) {
     ROS_INFO_STREAM(BASH_MSG_GREEN << "Xsens Mtw Wrapper... Resetting orientation of all connected sensors"
                                    << BASH_MSG_RESET);
     for (auto& device : connected_devices_) {
